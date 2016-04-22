@@ -1,7 +1,6 @@
 var express = require('express')
 var bodyParser = require('body-parser')
 var request = require('request')
-var http = require('http').Server(app);
 var app = express()
 
 app.set('port', (process.env.PORT || 5000))
@@ -24,6 +23,8 @@ app.get('/webhook/', function (req, res) {
     }
     res.send('Error, wrong token')
 })
-http.listen(process.env.PORT || 3000, function(){
-  console.log('listening on', http.address().port);
-});
+
+// Spin up the server
+app.listen(app.get('port'), function() {
+    console.log('running on port', app.get('port'))
+})
