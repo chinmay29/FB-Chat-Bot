@@ -23,3 +23,6 @@ app.get('/webhook/', function (req, res) {
     }
     res.send('Error, wrong token')
 })
+http.listen(process.env.PORT || 3000, function(){
+  console.log('listening on', http.address().port);
+});
