@@ -28,3 +28,18 @@ app.get('/webhook/', function (req, res) {
 app.listen(app.get('port'), function() {
     console.log('running on port', app.get('port'))
 })
+
+app.post('/webhook/', function (req, res) {
+    messaging_events = req.body.entry[0].messaging
+    for (i = 0; i < messaging_events.length; i++) {
+        event = req.body.entry[0].messaging[i]
+        sender = event.sender.id
+        if (event.message && event.message.text) {
+            text = event.message.text
+            sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+        }
+    }
+    res.sendStatus(200)
+})
+
+var token = "EAAWwZC1IPifwBAEUBiMt1vxoOSNuRxTqx5vbPqn7MWJF1QXikCtbXQMnOGbOztDxRKZBsbwXZCwXma82lLDnVI1eOZAGZC1KEENqZAbZC3UbvNLnZAOxSrbXsviw1rsyaX8LJCoWK3QN62G4lCwH3DXvKuB7N4QAI7hZBNXLOm4O1eQZDZD"
